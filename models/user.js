@@ -9,15 +9,23 @@ const userSchema = new mongoose.Schema({
 
     dateOfEntry:  Date,
 
-    deviceId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Device',
-    },
+    devices: [{
+        deviceId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Device',
+        },
+        assignedAt: {
+            type: Date,
+            default: Date.now,
+        }
+    }],
 
     client: String,
     action: String,
     team: String,
     category: String,
+
+    
 
 })
 
