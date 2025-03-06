@@ -1,25 +1,40 @@
 import mongoose from "mongoose";
 
-const DeviceSchema = new mongoose.Schema({
-    model: String,
-    imei: String,
-    phoneNumber: Number,
-    googleAccount: String,
-
-})
-
 const deviceSchema = new mongoose.Schema({
   type: {
     type: String,
-    enum: ['celular', 'computadora', 'auriculares', 'tablet', 'otro'],
+    enum: ['celular', 'computadora', 'tablet'],
     required: true,
   },
   model: String,
   serialNumber: { type: String, unique: true, required: true},
-  phoneNumber: { type: String, unique: true, sparse: true }, // Puede ser null o no estar presente
+  phoneNumber: { type: String, unique: true, sparse: true },
+  googleAccount: String,
   assignedTo: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    default: null, // Permite teléfonos sin usuario asignado
+    default: null,
+  },
+  conditions:{
+    type: String,
+    enum: ['OK', 'NOT OK'],
+  },
+  
+  observations: {
+    type: String,
+    default: "Sin detallar",
+  }
+},
+{timestamps: true});
+
+deviceSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
   },
 });
+
+const Device = mongoose.model('Device', deviceSchema)
+
+export default Device
