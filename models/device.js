@@ -5,19 +5,35 @@ const deviceSchema = new mongoose.Schema({
     type: String,
     enum: ['celular', 'computadora', 'tablet'],
     required: true,
+    trim: true,
   },
-  model: String,
+  model: {
+    type: String,
+    trim:true,
+  },
   serialNumber: { type: String, unique: true, required: true},
   phoneNumber: { type: String, unique: true, sparse: true },
-  googleAccount: String,
-  assignedTo: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    default: null,
+  googleAccount: {
+    type:String,
+    trim:true
   },
+  assignedTo: [{
+    user:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      default: null,
+    },
+
+    date:{
+      type:Date,
+      default: Date.now
+    }
+  }],
+
   conditions:{
     type: String,
     enum: ['OK', 'NOT OK'],
+    default: 'OK'
   },
   
   observations: {
