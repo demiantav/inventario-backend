@@ -5,6 +5,7 @@ const deviceSchema = new mongoose.Schema({
     type: String,
     enum: ['celular', 'computadora', 'tablet'],
     required: true,
+    default: 'celular',
     trim: true,
   },
   model: {

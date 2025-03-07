@@ -9,6 +9,11 @@ const userSchema = new mongoose.Schema({
 
     dateOfEntry:  Date,
 
+    dni: {
+        type: Number,
+        unique:true,
+    },
+
     devices: [{
         deviceId: {
             type: mongoose.Schema.Types.ObjectId,
