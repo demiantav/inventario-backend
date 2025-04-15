@@ -1,48 +1,57 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const deviceSchema = new mongoose.Schema({
-  type: {
-    type: String,
-    enum: ['celular', 'computadora', 'tablet'],
-    required: true,
-    default: 'celular',
-    trim: true,
-  },
-  model: {
-    type: String,
-    trim:true,
-  },
-  serialNumber: { type: String, unique: true, required: true},
-  phoneNumber: { type: String, unique: true, sparse: true },
-  googleAccount: {
-    type:String,
-    trim:true
-  },
-  assignedTo: [{
-    user:{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      default: null,
+const deviceSchema = new mongoose.Schema(
+  {
+    type: {
+      type: String,
+      enum: ['Celular', 'Computadora', 'Tablet'],
+      required: true,
+    },
+    model: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    serialNumber: { type: String, unique: true, required: true },
+    phoneNumber: { type: String, unique: true, sparse: true },
+    googleAccount: {
+      type: String,
+      trim: true,
+    },
+    assignedTo: [
+      {
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+          default: null,
+        },
+
+        assignedAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+
+    condition: {
+      type: String,
+      enum: ['OK', 'NOT OK'],
+      default: 'OK',
     },
 
-    date:{
-      type:Date,
-      default: Date.now
-    }
-  }],
+    observations: {
+      type: String,
+      trim: true,
+    },
 
-  conditions:{
-    type: String,
-    enum: ['OK', 'NOT OK'],
-    default: 'OK'
+    status: {
+      type: String,
+      enum: ['Disponible', 'Asignado', 'Roto'],
+      default: 'disponible',
+    },
   },
-  
-  observations: {
-    type: String,
-    default: "Sin detallar",
-  }
-},
-{timestamps: true});
+  { timestamps: true }
+);
 
 deviceSchema.set('toJSON', {
   transform: (document, returnedObject) => {
@@ -52,6 +61,6 @@ deviceSchema.set('toJSON', {
   },
 });
 
-const Device = mongoose.model('Device', deviceSchema)
+const Device = mongoose.model('Device', deviceSchema);
 
-export default Device
+export default Device;
