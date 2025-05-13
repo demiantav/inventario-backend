@@ -18,20 +18,6 @@ const deviceSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    assignedTo: [
-      {
-        user: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'User',
-          default: null,
-        },
-
-        assignedAt: {
-          type: Date,
-          default: Date.now,
-        },
-      },
-    ],
 
     condition: {
       type: String,
@@ -46,8 +32,8 @@ const deviceSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: ['Disponible', 'Asignado', 'Roto'],
-      default: 'disponible',
+      enum: ['Sin asignar', 'Asignado', 'Defectuoso', 'Robado'],
+      default: 'Disponible',
     },
   },
   { timestamps: true }

@@ -33,9 +33,10 @@ const userSchema = new mongoose.Schema({
 
   client: String,
   team: String,
+  action: String,
   category: {
     type: String,
-    enum: ['Colaborador', 'Supervisor'],
+    enum: ['Asesor', 'Supervisor'],
   },
 });
 
