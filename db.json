@@ -53,13 +53,12 @@
         "phoneNumber": "1159205910",
         "model": "Motorola E22",
         "googleAccount": "dl14.solvens",
-        "name": "En deposito",
         "client": "Meli",
         "action": "Delivery",
         "category": "Asesor",
         "condition": "OK",
         "type": "Celular",
-        "status": "Asignado"
+        "status": "Sin asignar"
     },
     {
         "team": "Team David",
@@ -130,9 +129,12 @@
         "phoneNumber": "1140629868",
         "model": "Motorola E14",
         "googleAccount": "dl26",
-        "name": "En deposito",
         "type": "Celular",
-        "status": "Asignado"
+        "status": "Sin asignar",
+        "client": "Meli",
+        "action": "Delivery",
+        "category": "Asesor",
+        "condition": "OK"
     },
     {
         "team": "Team David",
@@ -161,7 +163,7 @@
         "dateOfEntry": "22/08/2023",
         "client": "Meli",
         "action": "Delivery",
-        "category": "Sup",
+        "category": "Supervisor",
         "condition": "OK",
         "type": "Celular",
         "status": "Asignado"
