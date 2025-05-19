@@ -9,8 +9,8 @@ const migrateDb = async () => {
   const dataJson = JSON.parse(fileBuffer);
 
   for (const record of dataJson) {
-    const device = await Device.findOne({ serialNumber: record.serialNumber });
-    const user = await User.findOne({ dni: record.dni });
+    const deviceToCheck = await Device.findOne({ serialNumber: record.serialNumber });
+    const userToCheck = await User.findOne({ dni: record.dni });
 
     try {
       const deviceCreated = new Device({
@@ -24,7 +24,7 @@ const migrateDb = async () => {
         status: record.status,
       });
       //Si es null creamos el dispositivo
-      if (device === null) {
+      if (deviceToCheck === null) {
         await deviceCreated.save();
         console.log('Dispositivo creado exitosamente!');
       } else {
@@ -32,12 +32,12 @@ const migrateDb = async () => {
         continue;
       }
 
-      if (user === null) {
+      if (userToCheck === null) {
         const userCreated = new User({
           name: record.name,
           dateOfEntry: record.dateOfEntry,
           dni: record.dni,
-          devices: [deviceCreated._id],
+          devices: [{ device: deviceCreated._id }],
           client: record.client,
           team: record.team,
           action: record.action,
