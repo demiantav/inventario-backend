@@ -33,7 +33,7 @@ const deviceSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: ['Sin asignar', 'Asignado', 'Defectuoso', 'Robado'],
-      default: 'Disponible',
+      default: 'Si asignar',
     },
   },
   { timestamps: true }
